@@ -232,10 +232,10 @@ a, button { touch-action: manipulation; }
 }
 .hero__lede {
   margin-top: 1.25rem;
-  max-width: 34ch;
+  max-width: 54ch;
   font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.25rem);
   color: var(--muted);
-  text-wrap: pretty;
+  text-wrap: balance;
 }
 .hero__actions {
   display: flex;
