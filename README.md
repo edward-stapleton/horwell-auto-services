@@ -48,11 +48,11 @@ The whole site is encrypted (AES-GCM, with the key derived from the password usi
 After any change to the site, rebuild and republish:
 
 ```bash
-HORWELL_PREVIEW_PASSWORD='the password' node scripts/build-preview.mjs
+node scripts/build-preview.mjs
 ```
 
 ```bash
 sh scripts/publish-preview.sh
 ```
 
-The publish script works in a fresh temporary clone of `personal-site`, so it never touches your local copy. The password itself is never committed. Enter it in capitals when building, because the password screen converts whatever is typed to capitals before checking it.
+The publish script works in a fresh temporary clone of `personal-site`, so it never touches your local copy. The build reads the password from `.preview-password` in the repo root. That file is gitignored, so the password is never committed; on a new machine, create it with the password on one line. Keep it in capitals, because the password screen converts whatever is typed to capitals before checking it.

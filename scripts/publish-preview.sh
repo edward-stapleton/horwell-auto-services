@@ -1,7 +1,7 @@
 #!/bin/sh
 # Publishes the password-protected preview to edwardstapleton.co.uk/horwell/.
 #
-#   HORWELL_PREVIEW_PASSWORD='the password' node scripts/build-preview.mjs
+#   node scripts/build-preview.mjs
 #   sh scripts/publish-preview.sh
 #
 # The preview is served by the personal-site repo (an Astro site: files in
