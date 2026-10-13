@@ -1,6 +1,6 @@
 # Horwell Auto Services
 
-Landing page for Horwell Auto Services Limited, a family run garage at Unit 1 Wheelers Rise, Croughton, Brackley NN13 5ND.
+Landing page for Horwell Auto Services Limited, a family run garage at Unit 1, Wheelers Rise, Croughton, Brackley NN13 5ND.
 
 Plain HTML and CSS with no build step. It's hosted on GitHub Pages.
 

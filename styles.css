@@ -232,11 +232,13 @@ a, button { touch-action: manipulation; }
 }
 .hero__lede {
   margin-top: 1.25rem;
-  max-width: 54ch;
+  max-width: 60ch;
   font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.25rem);
   color: var(--muted);
   text-wrap: balance;
 }
+.hero__lede .nowrap { white-space: nowrap; }
+.hero__break { display: none; }
 .hero__actions {
   display: flex;
   flex-direction: column;
@@ -386,6 +388,7 @@ a, button { touch-action: manipulation; }
 
 /* Tablet and up */
 @media (min-width: 768px) {
+  .hero__break { display: inline; }
   .status-bar { position: static; }
   .status-bar__phone { display: inline-flex; }
   .status-bar__call { display: none; }
