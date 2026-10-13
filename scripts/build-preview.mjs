@@ -1,6 +1,10 @@
 // Builds the password-protected preview of the site into preview/.
 //
-//   HORWELL_PREVIEW_PASSWORD='the password' node scripts/build-preview.mjs
+//   node scripts/build-preview.mjs
+//
+// The password is read from .preview-password in the repo root (gitignored, so
+// never committed). HORWELL_PREVIEW_PASSWORD overrides it; with neither, the
+// script asks for it.
 //
 // The whole site (index.html with styles, font, logos and icons inlined) is
 // encrypted with AES-GCM using a key derived from the password, and written to
@@ -29,6 +33,8 @@ function replaceOnce(html, from, to) {
 
 async function getPassword() {
   if (process.env.HORWELL_PREVIEW_PASSWORD) return process.env.HORWELL_PREVIEW_PASSWORD;
+  const saved = await readFile(path.join(ROOT, '.preview-password'), 'utf8').catch(() => '');
+  if (saved.trim()) return saved.trim();
   const rl = createInterface({ input: process.stdin, output: process.stdout });
   const pw = await rl.question('Preview password: ');
   rl.close();
