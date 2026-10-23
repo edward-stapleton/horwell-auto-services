@@ -267,10 +267,10 @@
   <script type="module">
     // Analytics (PostHog, EU cloud). Cookieless, so there's no consent banner.
     // Only runs on the live site, so the password preview and localhost stay out of the numbers.
-    const POSTHOG_TOKEN = "phc_REPLACE_ME";
+    const POSTHOG_TOKEN = "phc_wYpiMzEnLCExHtkFTWXCAnJW9emzeqKzuStPu5B4S7vQ";
     const LIVE = location.hostname === "www.horwell.co.uk" || new URLSearchParams(location.search).has("posthog-debug");
 
-    if (LIVE && !POSTHOG_TOKEN.endsWith("REPLACE_ME")) {
+    if (LIVE) {
       const posthog = import("https://cdn.jsdelivr.net/npm/posthog-js@1.436.1/+esm").then(({ default: ph }) => {
         ph.init(POSTHOG_TOKEN, {
           api_host: "https://eu.i.posthog.com",
