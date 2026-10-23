@@ -264,5 +264,45 @@
       }, { amount: 0.9 });
     }
   </script>
+  <script type="module">
+    // Analytics (PostHog, EU cloud). Cookieless, so there's no consent banner.
+    // Only runs on the live site, so the password preview and localhost stay out of the numbers.
+    const POSTHOG_TOKEN = "phc_REPLACE_ME";
+    const LIVE = location.hostname === "www.horwell.co.uk" || new URLSearchParams(location.search).has("posthog-debug");
+
+    if (LIVE && !POSTHOG_TOKEN.endsWith("REPLACE_ME")) {
+      const posthog = import("https://cdn.jsdelivr.net/npm/posthog-js@1.436.1/+esm").then(({ default: ph }) => {
+        ph.init(POSTHOG_TOKEN, {
+          api_host: "https://eu.i.posthog.com",
+          defaults: "2026-08-30",
+          cookieless_mode: "always",
+          person_profiles: "identified_only",
+          debug: location.hostname !== "www.horwell.co.uk",
+        });
+        ph.register({ site: "horwell" });
+        return ph;
+      });
+
+      // Conversion clicks. Listening straight away means a quick tap isn't missed while the library loads.
+      function placement(el) {
+        if (el.closest(".status-bar")) return "status_bar";
+        if (el.closest(".hero")) return "hero";
+        if (el.closest("#find-us")) return "find_us";
+        return "other";
+      }
+
+      document.addEventListener("click", (e) => {
+        const link = e.target.closest("a[href]");
+        if (!link) return;
+        const href = link.getAttribute("href");
+        let event;
+        if (link.id === "appointment") event = "appointment_request_clicked";
+        else if (href.startsWith("tel:")) event = "phone_call_clicked";
+        else if (href.includes("google.com/maps")) event = "directions_clicked";
+        else if (href.includes("facebook.com")) event = "facebook_clicked";
+        if (event) posthog.then((ph) => ph.capture(event, { placement: placement(link) }));
+      }, { capture: true });
+    }
+  </script>
 </body>
 </html>
