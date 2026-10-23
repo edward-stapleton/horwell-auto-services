@@ -2,7 +2,7 @@
 
 Landing page for Horwell Auto Services Limited, a family run garage at Unit 1, Wheelers Rise, Croughton, Brackley NN13 5ND.
 
-Plain HTML and CSS with no build step. It's hosted on GitHub Pages.
+Plain HTML and CSS with no build step, hosted on GitHub Pages at https://www.horwell.co.uk.
 
 ## Files
 
@@ -37,7 +37,9 @@ horwellRenderStatus(new Date('2026-10-17T10:00:00Z'))
 
 ## Deploy
 
-In the repo settings, enable GitHub Pages with **Deploy from a branch**, set to `main` / root. To use a custom domain, add a `CNAME` file containing the domain and point its DNS at GitHub Pages.
+The site is live at https://www.horwell.co.uk. Every push to `main` deploys it to GitHub Pages through `.github/workflows/deploy.yml`, which publishes only the site files (not `preview/`, `scripts/` or this README). If you add a new top-level file the page needs, add it to the `cp` line in that workflow.
+
+The repo's Pages settings use **GitHub Actions** as the source, with `www.horwell.co.uk` as the custom domain and HTTPS enforced. DNS is managed at GoDaddy: `www` is a CNAME to `edward-stapleton.github.io`, and the bare domain has A records for `185.199.108.153`, `185.199.109.153`, `185.199.110.153` and `185.199.111.153`, so it redirects to www.
 
 ## Password-protected preview
 
