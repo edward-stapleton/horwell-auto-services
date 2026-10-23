@@ -21,6 +21,19 @@ Plain HTML and CSS with no build step, hosted on GitHub Pages at https://www.hor
 - **Opening hours:** update the table in `index.html`, the `OPEN` / `CLOSE` values in the script at the bottom, and `openingHoursSpecification` in the JSON-LD block in `<head>`.
 - **Appointment email:** the recipient, subject and body template are set in the script at the bottom of `index.html`.
 
+## Analytics
+
+PostHog (EU cloud), in the Stapleton Enterprises Limited organisation, shared with edwardstapleton.co.uk; filter by the `site` property (`horwell`). The token and setup are in the last script in `index.html`. It runs cookieless, so there's no consent banner, and only on www.horwell.co.uk, so the preview and localhost don't count. Add `?posthog-debug` to the URL to send events from anywhere, with logging in the console.
+
+Conversion events, each with a `placement` property (`status_bar`, `hero` or `find_us`):
+
+| Event | When |
+| --- | --- |
+| `appointment_request_clicked` | The Request an Appointment button |
+| `phone_call_clicked` | Any of the phone links |
+| `directions_clicked` | The Google Maps link |
+| `facebook_clicked` | The Facebook link |
+
 ## Preview locally
 
 ```bash
