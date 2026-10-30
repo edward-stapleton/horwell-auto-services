@@ -14,6 +14,7 @@ Plain HTML and CSS with no build step, hosted on GitHub Pages at https://www.hor
 | `assets/og-image.png` | Preview image shown when the link is shared |
 | `assets/favicon.svg`, `apple-touch-icon.png` | Browser tab and home screen icons |
 | `assets/fonts/` | Archivo (SIL Open Font License), served from the site |
+| `brand/` | Icon and logo as SVG, plus transparent PNGs at several sizes, for use outside the site (social profiles, print, email). Served at www.horwell.co.uk/brand/ |
 
 ## Common edits
 
