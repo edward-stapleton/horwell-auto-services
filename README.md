@@ -25,6 +25,8 @@ Plain HTML and CSS with no build step, hosted on GitHub Pages at https://www.hor
 
 PostHog (EU cloud), in the Stapleton Enterprises Limited organisation, shared with edwardstapleton.co.uk; filter by the `site` property (`horwell`). The token and setup are in the last script in `index.html`. It runs cookieless, so there's no consent banner, and only on www.horwell.co.uk, so the preview and localhost don't count. Add `?posthog-debug` to the URL to send events from anywhere, with logging in the console.
 
+To stop your own visits being counted, open https://www.horwell.co.uk/?posthog-exclude once in each browser you use. That browser stays excluded until you open https://www.horwell.co.uk/?posthog-include. `?posthog-debug` still sends events from an excluded browser.
+
 Conversion events, each with a `placement` property (`status_bar`, `hero` or `find_us`):
 
 | Event | When |
