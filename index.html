@@ -268,7 +268,21 @@
     // Analytics (PostHog, EU cloud). Cookieless, so there's no consent banner.
     // Only runs on the live site, so the password preview and localhost stay out of the numbers.
     const POSTHOG_TOKEN = "phc_wYpiMzEnLCExHtkFTWXCAnJW9emzeqKzuStPu5B4S7vQ";
-    const LIVE = location.hostname === "www.horwell.co.uk" || new URLSearchParams(location.search).has("posthog-debug");
+    const PARAMS = new URLSearchParams(location.search);
+    const DEBUG = PARAMS.has("posthog-debug");
+
+    // Open the site once with ?posthog-exclude to stop counting this browser, or ?posthog-include to undo it.
+    function excluded() {
+      try {
+        if (PARAMS.has("posthog-exclude")) localStorage.setItem("posthog-exclude", "1");
+        if (PARAMS.has("posthog-include")) localStorage.removeItem("posthog-exclude");
+        return localStorage.getItem("posthog-exclude") === "1";
+      } catch {
+        return false;
+      }
+    }
+
+    const LIVE = (location.hostname === "www.horwell.co.uk" && !excluded()) || DEBUG;
 
     if (LIVE) {
       const posthog = import("https://cdn.jsdelivr.net/npm/posthog-js@1.436.1/+esm").then(({ default: ph }) => {
@@ -277,7 +291,7 @@
           defaults: "2026-08-30",
           cookieless_mode: "always",
           person_profiles: "identified_only",
-          debug: location.hostname !== "www.horwell.co.uk",
+          debug: DEBUG,
         });
         ph.register({ site: "horwell" });
         return ph;
